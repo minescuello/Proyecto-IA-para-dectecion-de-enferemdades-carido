@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ac: #007ba7; --ac-ink: var(--ac); --panel: #fff; --chip: #0a0a0a12; --mut: #475c65;
+  --bs-body-bg: #f0f5f7; --bs-body-bg-rgb: 240, 245, 247; --bs-body-color: #0a0a0a; --bs-body-color-rgb: 10, 10, 10;
+  --bs-primary: #007ba7; --bs-primary-rgb: 0, 123, 167; --bs-border-color: #d4e1e6;
+  --bs-link-color: #007ba7; --bs-link-color-rgb: 0, 123, 167; --bs-link-hover-color: #005775; --bs-link-hover-color-rgb: 0, 87, 117;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+[data-bs-theme='dark'] {
+  --ac-ink: #66c5e7; --panel: #151b1e; --chip: #ffffff14; --mut: #afc1c8;
+  --bs-body-bg: #0a0a0a; --bs-body-bg-rgb: 10, 10, 10; --bs-body-color: #e6f0f3; --bs-body-color-rgb: 230, 240, 243;
+  --bs-border-color: #2d4149; --bs-link-color: #66c5e7; --bs-link-color-rgb: 102, 197, 231;
+  --bs-link-hover-color: #a1e4fa; --bs-link-hover-color-rgb: 161, 228, 250;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+.mut { color: var(--mut); }
+.ac { color: var(--ac-ink); }
+
+.panel { background: var(--panel); border: 1px solid var(--bs-border-color); border-radius: 1.25rem; transition: transform .3s, box-shadow .3s; }
+.panel-hover:hover { transform: translateY(-3px); box-shadow: 0 14px 34px -16px #007ba766; }
+.table { --bs-table-bg: transparent; }
+
+/* Segmentado y chips (Bootstrap btn-group con la marca de CardioIA) */
+.seg { background: var(--chip); border-radius: .75rem; padding: 4px; }
+.seg .btn { border: 0; border-radius: .6rem !important; color: inherit; font-weight: 600; transition: all .3s; }
+.seg .btn.active { background: var(--ac); color: #fff; box-shadow: 0 4px 12px -4px #007ba799; }
+.chip { background: var(--chip); border: 0; font-weight: 600; transition: all .3s; color: inherit; }
+.chip:hover { transform: translateY(-2px); }
+.chip.active { background: var(--ac); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 18px -8px #007ba7; }
+
+.form-range::-webkit-slider-thumb { background: var(--ac); }
+.form-range::-moz-range-thumb { background: var(--ac); }
+.progress { transition: width 1s cubic-bezier(.2,.8,.2,1); background: var(--chip); }
+.progress-bar { transition: width 1s cubic-bezier(.2,.8,.2,1); }
+.nav-indicator { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+.acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s cubic-bezier(.2,.8,.2,1); }
+.acc-body.open { grid-template-rows: 1fr; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* Formularios Bootstrap con la marca de CardioIA */
+.form-check-input:checked { background-color: var(--ac); border-color: var(--ac); }
+.form-control:focus, .form-select:focus, .form-check-input:focus { border-color: var(--ac); box-shadow: 0 0 0 .2rem #007ba733; }
+.btn-ac { background: var(--ac); color: #fff; border: 0; font-weight: 700; transition: transform .25s, box-shadow .25s, filter .25s; }
+.btn-ac:hover, .btn-ac:focus-visible { color: #fff; filter: brightness(1.08); transform: translateY(-2px); box-shadow: 0 10px 22px -10px #007ba7; }
+
+/* Toque clínico */
+body { background-image: radial-gradient(900px 420px at 88% -6%, #007ba71f, transparent 70%); background-attachment: fixed; }
+.ecg { display: block; width: 100%; max-width: 280px; height: 26px; margin-top: .35rem; }
+.badge-ac { background: var(--ac); color: #fff; }
+.foto { cursor: zoom-in; transition: transform .3s, box-shadow .3s; }
+.foto:hover { transform: translateY(-3px); box-shadow: 0 14px 34px -16px #007ba766; }
+
+/* Estado en vivo y pestañas */
+.punto { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: .45rem; background: #8da2ac; }
+.punto.en-vivo { background: #059669; animation: pulso 1.6s ease-in-out infinite; }
+@keyframes pulso { 0% { box-shadow: 0 0 0 0 #05966980; } 70% { box-shadow: 0 0 0 7px #05966900; } 100% { box-shadow: 0 0 0 0 #05966900; } }
+.tab-ind { transition: left .45s cubic-bezier(.2,.8,.2,1), width .45s cubic-bezier(.2,.8,.2,1); }
+.nav-scroll { scrollbar-width: none; }
+.nav-scroll::-webkit-scrollbar { display: none; }
+
+/* ===== Shell con barra lateral ===== */
+.side { position: fixed; top: 0; left: 0; bottom: 0; width: 272px; z-index: 40; display: flex; flex-direction: column; color: #e6f0f3;
+  background: linear-gradient(180deg, #0c2129 0%, #11313e 55%, #0a0a0a 100%); box-shadow: 8px 0 30px -18px #0a0a0aaa; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+[data-bs-theme='dark'] .side { background: linear-gradient(180deg, #0a0a0a 0%, #10232b 60%, #0a0a0a 100%); }
+.side-marca { display: flex; align-items: center; gap: .8rem; padding: 1.4rem 1.25rem 1rem; }
+.marca-ico { width: 46px; height: 46px; border-radius: 14px; background: linear-gradient(135deg, #79d6f6, #44a5c7); display: grid; place-items: center; box-shadow: 0 8px 20px -8px #44a5c7aa; }
+.marca-t { font-weight: 800; font-size: 1.25rem; line-height: 1.1; color: #fff; }
+.marca-s { font-size: .62rem; letter-spacing: .12em; font-weight: 700; color: #bbdbe5; text-transform: uppercase; }
+.side-nav { position: relative; flex: 1; overflow-y: auto; padding: .25rem .9rem 1rem; scrollbar-width: thin; }
+.side-grupo { font-size: .68rem; letter-spacing: .16em; font-weight: 800; text-transform: uppercase; color: #9cbbc6; padding: 1.1rem .6rem .45rem; }
+.side-link { position: relative; z-index: 1; display: flex; align-items: center; gap: .8rem; padding: .62rem .8rem; border-radius: .9rem; color: #e6f0f3; text-decoration: none; font-weight: 600; font-size: .92rem; transition: background .25s, color .25s, transform .25s; }
+.side-link:hover { background: #ffffff14; color: #fff; transform: translateX(3px); }
+.side-link.activo { color: #79d6f6; }
+.side-pill { position: absolute; left: .9rem; right: .9rem; border-radius: .9rem; background: linear-gradient(90deg, #ffffff24, #007ba74d); box-shadow: inset 0 0 0 1px #ffffff1f; transition: top .4s cubic-bezier(.2,.8,.2,1), height .4s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+.side-off { margin-left: auto; width: 7px; height: 7px; border-radius: 50%; background: #f59e0b99; }
+.side-pie { padding: .9rem 1.25rem; font-size: .72rem; color: #9cbbc6; border-top: 1px solid #ffffff1a; }
+.side-fondo { position: fixed; inset: 0; background: #0a0a0a99; z-index: 35; animation: fundido .25s both; }
+@keyframes fundido { from { opacity: 0; } to { opacity: 1; } }
+.main { margin-left: 272px; min-height: 100vh; position: relative; overflow-x: hidden; }
+.topbar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: .75rem; padding: .75rem 1.25rem; border-bottom: 1px solid var(--bs-border-color);
+  background: color-mix(in srgb, var(--bs-body-bg) 85%, transparent); backdrop-filter: blur(10px); }
+.contenido { max-width: 1140px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+.eyebrow { font-size: .72rem; letter-spacing: .14em; font-weight: 800; text-transform: uppercase; color: var(--ac-ink); }
+.titulo { font-size: clamp(1.7rem, 3.2vw, 2.4rem); font-weight: 800; letter-spacing: -.02em; margin: .2rem 0 .5rem; }
+.hero { position: relative; overflow: hidden; border-radius: 1.5rem; padding: 2.2rem; color: #fff; background: linear-gradient(135deg, #0c2129, #005775 60%, #007ba7); box-shadow: 0 24px 50px -30px #0c2129; }
+.hero::after { content: ''; position: absolute; right: -80px; top: -80px; width: 280px; height: 280px; border-radius: 50%; background: #ffffff12; }
+.hero .ecg path:last-child { stroke: #79d6f6; }
+.hero .btn-light { --bs-btn-color: #0a0a0a; --bs-btn-bg: #79d6f6; --bs-btn-border-color: #79d6f6;
+  --bs-btn-hover-color: #0a0a0a; --bs-btn-hover-bg: #a1e4fa; --bs-btn-hover-border-color: #a1e4fa; --bs-btn-focus-shadow-rgb: 121, 214, 246;
+  --bs-btn-active-color: #0a0a0a; --bs-btn-active-bg: #44a5c7; --bs-btn-active-border-color: #44a5c7; }
+.acceso-ico { flex: 0 0 auto; width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: #007ba71f; color: var(--ac-ink); }
+@media (max-width: 991.98px) { .side { transform: translateX(-102%); } .side.abierto { transform: none; } .main { margin-left: 0; } }
